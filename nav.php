@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <div class="container">
+=======
+	<div class="container">
+>>>>>>> 886ba22666d1504eafa28065088767ba30b445cd
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only navbar-light bg-warning">Toggle navigation</span>

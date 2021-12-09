@@ -58,6 +58,7 @@ $member = mysqli_fetch_assoc($sqlmember);
 				$billing_period = date('Y-m-d', strtotime($billing_period));
 								
 				$insert = mysqli_query($con, "INSERT INTO fees(pid, fee_date, fee, discount, method, billing_period, month_type, user_auth, inserted_at) 
+
 				VALUES('$p_id', '$timestamp', '$fee', '$discount', '$method', '$billing_period', '$month_type', '$user','$timestamp')") or die(mysqli_error());
 				if($insert){
 					echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Fee was successfully saved.</div>';
