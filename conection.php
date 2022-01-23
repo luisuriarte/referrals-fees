@@ -1,5 +1,5 @@
 <?php
-/*Datos de conexion a la base de datos*/
+/*Datos de conexion a la base de datos Mysql*/
 $db_host = "*******";
 $db_user = "*******";
 $db_pass = "*******";
