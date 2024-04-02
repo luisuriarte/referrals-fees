@@ -12,7 +12,7 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="list.php">Fee List</a></li>
-					<li><a href="referrals.php">Refrrals</a></li>
+					<li><a href="referrals.php">Referrals</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 	</div>
