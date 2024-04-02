@@ -4,7 +4,8 @@ include("functions.php");
 include("conection.php");
 $tp = 0;
 $dayb = 40;
-
+$sqlmember = mysqli_query($con, "SELECT l.title FROM list_options l INNER JOIN patient_data p ON p.pricelevel = l.option_id WHERE p.pid = $p_id");
+$member = mysqli_fetch_assoc($sqlmember);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +64,7 @@ $dayb = 40;
 			<table class="table table-striped table-hover">
 			<tr>
             <th>Name</th>
-            <th>SS Number</th>
+            <th>Member Type</th>
 			<th>Fee</th>
 			<th>Last Payment</th>
 			<th>Last Period Payment</th>
@@ -92,7 +93,7 @@ $dayb = 40;
 						echo '
 				<tr>
 				<td>'.$row['pname'].'</a></td>
-                <td>'.$row['ss'].'</td>
+                <td>'.$member['title'].'</td>
                 <td>'.$row['fee'].'</td>
 				<td>';
 				$fecha = $row['fee_date'];
