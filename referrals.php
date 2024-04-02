@@ -52,7 +52,7 @@ $dayb = 40;
 			<input type="date" name="date_back" value=" " class="input-group date form-control"  placeholder="yyyy-mm-dd"
 			</div>
 			-->
-			<input name="csrf" type="hidden" value="<?php echo escape($_SESSION['csrf']); ?>">
+			<input name="csrf" type="hidden" value="<?php echo escape($_SESSION['csrf']);?>">
 			<button type="submit" name="btnenviar" class="btn btn-primary">View Result</button>
 			</form>
 			</div>
@@ -71,14 +71,14 @@ $dayb = 40;
 			<th>Status</th>
 			</tr>
 				<?php
-				//$sql = mysqli_query($con, "SELECT p.id, p.pid, concat(p.lname, ', ', p.fname, ' ', p.mname) pname, p.ss ss, f2.fee fee, f2.fee_date //fee_date,CURDATE() current, f2.billing_period billing_period, DATEDIFF(CURDATE(), f2.billing_period) days_gone, f2.deleted
+				//$sql = mysqli_query($con, "SELECT p.id, p.pid, concat(p.lname, ', ', p.fname, ' ', p.mname) pname, p.ss ss, f2.fee fee, f2.fee_date fee_date,CURDATE() current, f2.billing_period billing_period, DATEDIFF(CURDATE(), f2.billing_period) days_gone, f2.deleted
 				//				FROM (SELECT MAX(id) AS id, pid	FROM fees GROUP BY pid) f
 				//			    INNER JOIN patient_data p ON f.pid = p.pid
 				//				INNER JOIN fees f2 ON f2.id = f.id 
 				//			    WHERE p.referred_by=$p_id AND f2.deleted='0'
 				//			    ");
 				
-				$sql = mysqli_query($con, "SELECT p.id, p.pid, concat(p.lname, ', ', p.fname, ' ', p.mname) pname, p.ss ss, f2.fee fee, f2.fee_date fee_date,CURDATE() current, f2.billing_period billing_period, f2.month_type month_type, DATEDIFF(CURDATE(), f2.fee_date) days_gone_pay, DATEDIFF(CURDATE(), f2.billing_period) days_gone_period, f2.deleted
+				$sql = mysqli_query($con, "SELECT p.id, p.pid, concat(p.lname, ', ', p.fname, ' ', p.mname) pname, p.ss ss, (f2.fee - discount) fee, f2.fee_date fee_date,CURDATE() current, f2.billing_period billing_period, f2.month_type month_type, DATEDIFF(CURDATE(), f2.fee_date) days_gone_pay, DATEDIFF(CURDATE(), f2.billing_period) days_gone_period, f2.deleted
 								FROM (SELECT MAX(id) AS id, pid	FROM fees GROUP BY pid) f
 							    INNER JOIN patient_data p ON f.pid = p.pid
 								INNER JOIN fees f2 ON f2.id = f.id 
@@ -104,7 +104,7 @@ $dayb = 40;
 				setlocale(LC_TIME, "english");
 				$fecha = $row['billing_period'];
 				$newDate = date("Y-m-d", strtotime($fecha));				
-				$mesDesc = strftime("%Y - %B", strtotime($newDate));
+				$mesDesc = date("Y - F", strtotime($newDate));
 				echo $mesDesc;
 				echo '
 				</td>
@@ -151,7 +151,7 @@ $dayb = 40;
 			</div>
 		</div>
 	</div><center>
-	<p>&copy; Vluznet <?php echo date("Y");?></p
+	<p>&copy; Origen <?php echo date("Y");?></p
 		</center>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

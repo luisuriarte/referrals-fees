@@ -39,10 +39,12 @@ $member = mysqli_fetch_assoc($sqlmember);
 			<hr />
 
 			<?php
+			$fecha_desde = date('Y/m/d');
+			$fecha_hasta = date('Y/m/d');
 			
 			if(ISSET($_GET['filter'])){
-				$date1 = date("Y-m-d", strtotime($_GET['date1']));
-				$date2 = date("Y-m-d", strtotime($_GET['date2']));
+				$fecha_desde = date("Y-m-d", strtotime($_GET['fecha_desde']));
+				$fecha_hasta = date("Y-m-d", strtotime($_GET['fecha_hasta']));
 			}
 			
 			if(isset($_GET['aksi']) == 'delete'){
@@ -75,18 +77,26 @@ $member = mysqli_fetch_assoc($sqlmember);
 			  </div>
 			</div>
 			
-			<!--
+
 			<hr style="color: #0056b2;" />
 			
 			<div class="col-md-12"></div>
 						<form class="form-inline" method="GET" action="">
-						<label>Date From:</label>
-							<input type="date" class="form-control" placeholder="Start" name="date1"/>
-						<label>Date To</label>
-							<input type="date" class="form-control" placeholder="End" name="date2"/>
+						<label>Date From: </label>
+							<?php 
+								$fecha_actual = date("Y-m-d");
+								$date_desde = date("Y-m-d",strtotime($fecha_actual."- 6 month"));
+							?>
+							<input type="date" class="form-control" value="<?php echo $date_desde; ?>" name="fecha_desde"/>
+						<label> - Date To: </label>
+							<?php 
+								$fecha_actual = date("Y-m-d");
+								$date_hasta = date("Y-m-d",strtotime($fecha_actual));
+							?>
+							<input type="date" class="form-control" value="<?php echo $date_hasta; ?>" name="fecha_hasta"/>
 						<?php $filter = (isset($_GET['filter']) ? strtolower($_GET['filter']) : NULL);  ?>
 				<button class="btn btn-primary" name="filter"><span class="glyphicon glyphicon-search"></span></button> <a href="list.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span></a>
-			-->
+		
 			<tr>
 			<br />
 			<hr style="color: #0056b2;" />
@@ -106,13 +116,13 @@ $member = mysqli_fetch_assoc($sqlmember);
 			</tr>
 			<?php
 			if($filter){
-					$sql = mysqli_query($con, "SELECT f.id id, f.pid pid, DATE(f.fee_date) fee_date, f.fee fee, f.discount discount, f.method method, f.billing_period, f.month_type, f.user_auth user_auth, (f.fee - f.discount) total, CONCAT(u.lname, ', ', u.fname, ' ', u.mname) user_auth FROM fees f INNER JOIN users u ON user_auth=u.id WHERE f.pid = $p_id AND deleted='0' AND (f.fee_date >= '".$date1."' AND f.fee_date <= '".$date2."') ORDER BY f.fee_date ASC");
-					echo $date1;
-					echo $date2;
+				    echo '6 meses';
+					$sql = mysqli_query($con, "SELECT f.id id, f.pid pid, DATE(f.fee_date) fee_date, f.fee fee, f.discount discount, f.method method, f.billing_period, f.month_type, f.user_auth AS user_auth, (f.fee - f.discount) AS total, CONCAT(u.lname, ', ', u.fname, ' ', u.mname) AS autorizo FROM fees AS f INNER JOIN users AS u ON user_auth=u.id WHERE f.pid = $p_id AND f.deleted='0', now(),DATE_SUB(now(), INTERVAL 6 MONTH) AND f.fee_date >= DATE_SUB(now(), INTERVAL 6 MONTH) LIMIT 20 ORDER BY f.fee_date ASC");
 				}else{
-					$sql = mysqli_query($con, "SELECT f.id id, f.pid pid, DATE(f.fee_date) fee_date, f.fee fee, f.discount discount, f.method method, f.billing_period, f.month_type, f.user_auth user_auth, (f.fee - f.discount) total, CONCAT(u.lname, ', ', u.fname, ' ', u.mname) user_auth FROM fees f INNER JOIN users u ON user_auth=u.id WHERE f.pid = $p_id AND deleted='0' ORDER BY f.fee_date DESC");
-					//echo $date2;
-					//echo $filter;
+					echo "<b>Período:   {$fecha_desde}    -    {$fecha_hasta} </b>";
+					$sql = mysqli_query($con, "SELECT f.id id, f.pid pid, DATE(f.fee_date) fee_date, f.fee fee, f.discount discount, f.method method, f.billing_period, f.month_type, f.user_auth authorize, (f.fee - f.discount) total, CONCAT(u.lname, ', ', u.fname, ' ', u.mname) AS user_auth FROM fees f INNER JOIN users u ON user_auth=u.id WHERE f.pid = $p_id AND f.deleted='0' AND (f.fee_date >= '$fecha_desde' AND f.fee_date <= '$fecha_hasta') ORDER BY f.fee_date DESC");
+					echo $date2;
+					echo $filter;
 				}
 			if(mysqli_num_rows($sql) == 0){
 			    echo '<tr><td colspan="8">Not found.</td></tr>';
@@ -132,7 +142,7 @@ $member = mysqli_fetch_assoc($sqlmember);
 				setlocale(LC_TIME, "english");
 				$fecha = $row['billing_period'];
 				$newDate = date("d-m-Y", strtotime($fecha));				
-				$mesDesc = strftime("%Y - %B", strtotime($newDate));
+				$mesDesc = date("Y - F", strtotime($newDate));
 				echo $mesDesc;
 				echo '
 				</td>
@@ -165,7 +175,7 @@ $member = mysqli_fetch_assoc($sqlmember);
 			</div>
 		</div>
 	</div><center>
-	<p>&copy; Vluznet <?php echo date("Y");?></p
+	<p>&copy; Origen <?php echo date("Y");?></p
 		</center>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

@@ -90,7 +90,7 @@ $member = mysqli_fetch_assoc($sqlmember);
 					setlocale(LC_TIME, "english");
 					$fecha = $row['billing_period'];
 					$newDate = date("d-m-Y", strtotime($fecha));				
-					$mesDesc = strftime("%Y - %B", strtotime($newDate));
+					$mesDesc = date("Y - M", strtotime($newDate));
 					?>
 					<td><?php echo $mesDesc; ?></td>
 				</tr>
