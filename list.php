@@ -3,6 +3,10 @@
 include("functions.php");
 include("conection.php");
 
+if (empty($p_id)) {
+    echo 'Debe seleccionar un Paciente';
+	exit();
+}
 $sqlmember = mysqli_query($con, "SELECT l.title FROM list_options l INNER JOIN patient_data p ON p.pricelevel = l.option_id WHERE p.pid = $p_id");
 $member = mysqli_fetch_assoc($sqlmember);
 
