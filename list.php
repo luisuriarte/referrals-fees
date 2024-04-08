@@ -33,7 +33,7 @@ $member = mysqli_fetch_assoc($sqlmember);
 
 </head>
 <body>
-	<nav class="navbar navbar-fixed-top bg-dark text-white" style="background-color: #e3f2fd;">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<?php include('nav.php');?>
 	</nav>
 	<div class="container">

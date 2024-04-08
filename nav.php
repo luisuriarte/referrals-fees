@@ -1,7 +1,7 @@
 <div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
+				<!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> -->
+					<!-- <span class="sr-only">Toggle navigation</span> -->
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -10,8 +10,8 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav ">
-					<li class="active"><a href="list.php">Fee List</a></li>
-					<li><a href="add.php">Add Fee</a></li>
+					<li class="active"><a href="referrals.php">Fee List</a></li>
+					<li class="active"><a href="add.php">Add Fee</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 	</div>
