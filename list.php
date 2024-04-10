@@ -121,12 +121,30 @@ $member = mysqli_fetch_assoc($sqlmember);
 			<?php
 			if($filter){
 				    echo '6 meses';
-					$sql = mysqli_query($con, "SELECT f.id id, f.pid pid, DATE(f.fee_date) fee_date, f.fee fee, f.discount discount, f.method method, f.billing_period, f.month_type, f.user_auth AS user_auth, (f.fee - f.discount) AS total, CONCAT(u.lname, ', ', u.fname, ' ', u.mname) AS autorizo FROM fees AS f INNER JOIN users AS u ON user_auth=u.id WHERE f.pid = $p_id AND f.deleted='0', now(),DATE_SUB(now(), INTERVAL 6 MONTH) AND f.fee_date >= DATE_SUB(now(), INTERVAL 6 MONTH) LIMIT 20 ORDER BY f.fee_date ASC");
+					$sql = mysqli_query($con, "SELECT f.id id, f.pid pid, 
+						DATE(f.fee_date) fee_date, f.fee fee, f.discount discount, f.method method, 
+						f.billing_period, f.month_type, f.user_auth AS user_auth, (f.fee - f.discount) AS total, 
+						CONCAT(u.lname, ', ', u.fname, ' ', u.mname) AS autorizo 
+						FROM fees AS f INNER JOIN users AS u ON user_auth=u.id 
+						WHERE f.pid = $p_id 
+							AND f.deleted='0' 
+							AND f.Fee_date 
+							BETWEEN curdate() and date_add(curdate(), interval -6 month) 
+						LIMIT 20 
+						ORDER BY f.fee_date ASC");
 				}else{
 					echo "<b>Período:   {$fecha_desde}    -    {$fecha_hasta} </b>";
-					$sql = mysqli_query($con, "SELECT f.id id, f.pid pid, DATE(f.fee_date) fee_date, f.fee fee, f.discount discount, f.method method, f.billing_period, f.month_type, f.user_auth authorize, (f.fee - f.discount) total, CONCAT(u.lname, ', ', u.fname, ' ', u.mname) AS user_auth FROM fees f INNER JOIN users u ON user_auth=u.id WHERE f.pid = $p_id AND f.deleted='0' AND (f.fee_date >= '$fecha_desde' AND f.fee_date <= '$fecha_hasta') ORDER BY f.fee_date DESC");
-					echo $date2;
-					echo $filter;
+					$sql = mysqli_query($con, "SELECT f.id id, f.pid pid, 
+						DATE(f.fee_date) fee_date, f.fee fee, f.discount discount, f.method method, 
+						f.billing_period, f.month_type, f.user_auth authorize, (f.fee - f.discount) AS total, 
+						CONCAT(u.lname, ', ', u.fname, ' ', u.mname) AS user_auth 
+						FROM fees f INNER JOIN users u ON user_auth=u.id 
+						WHERE f.pid = $p_id 
+							AND f.deleted='0' 
+							AND (f.fee_date >= '$fecha_desde' 
+							AND f.fee_date <= '$fecha_hasta')
+						LIMIT 20 
+						ORDER BY f.fee_date DESC");
 				}
 			if(mysqli_num_rows($sql) == 0){
 			    echo '<tr><td colspan="8">Not found.</td></tr>';
