@@ -61,7 +61,7 @@ $member = mysqli_fetch_assoc($sqlmember);
 			
 			<table class="table table-striped table-condensed">
 				<tr>
-					<th>Payment Date $ Time</th>
+					<th>Payment Date</th>
 					<td><?php echo $row['fee_date']; ?></td>
 				</tr>
 				<tr>
