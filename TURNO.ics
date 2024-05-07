@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+METHOD:REQUEST
+PRODID:-//Microsoft Corporation//Outlook 11.0 MIMEDIR//EN
+VERSION:2.0
+BEGIN:VEVENT
+DTSTART;TZID=America/Argentina/Buenos_Aires:20231129T144500
+DTEND;TZID=America/Argentina/Buenos_Aires:20231129T150000
+LOCATION:Rivadavia 98, San Carlos Centro, Santa Fe
+TRANSP:OPAQUE
+SEQUENCE:0
+UID:20231127T135002-1664583529@origen.ar
+ORGANIZER;CN=Medica  Uno:mailto:centroc@origen.ar
+ATTENDEE;PARTSTAT=ACCEPTED;CN=Luis Angel Uriarte;EMAIL=luisuriarte@gmail.com:mailto:luisuriarte@gmail.com
+CONTACT:Centro Comunitario\, +5493404540440\,centroc@origen.ar
+DTSTAMP:20231127T165002Z
+SUMMARY:Turno en Centro Comunitario
+DESCRIPTION:Srta. Ana  Perez, recuerde que tiene una cita con  Conrado  Avendaño  en nuestra clínica el Miercoles 08 de Mayo del 2024, a partir de las 14:45 ubicada en Ciudad de Encarnación, Encarnación, . Solicitamos estar en recepción 10 minutos antes. Por favor, si no puede presentarse le solicitamos envíe un mensaje a nuestro número de teléfono 3404540440. Gracias. Clínica Encarnación
+URL;VALUE=URI:https://salud.origen.ar
+PRIORITY:5
+CLASS:PUBLIC
+END:VEVENT
+END:VCALENDAR
